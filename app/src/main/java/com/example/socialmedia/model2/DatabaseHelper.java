@@ -301,7 +301,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void delete(Integer id){
         SQLiteDatabase db=this.getWritableDatabase();
-        db.delete(POST_USER,ID_POST+" = ?",new String[]{String.valueOf(id)});
+        db.delete(POST_USER,ID_POST+" = ?",new String[]{ID_POST});
         db.close();
 
     }

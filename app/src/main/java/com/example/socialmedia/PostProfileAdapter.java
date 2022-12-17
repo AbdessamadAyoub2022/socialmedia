@@ -20,6 +20,7 @@ public class PostProfileAdapter extends ArrayAdapter<Post> {
 
     List<Post> posts=new ArrayList<>();
 
+
     public PostProfileAdapter(Context context,int ressource,List<Post> posts){
         super(context,ressource,posts);
     }
@@ -28,7 +29,7 @@ public class PostProfileAdapter extends ArrayAdapter<Post> {
 
     public View getView(int position, View view, ViewGroup parent){
 
-        DatabaseHelper db=new DatabaseHelper(getContext());
+
 
             Post post =getItem(position);
         View item = view;
@@ -37,6 +38,7 @@ public class PostProfileAdapter extends ArrayAdapter<Post> {
             TextView description = item.findViewById(R.id.desc_profile);
             post_pic.setImageBitmap(Utility.convertBLOB2Bitmap(post.getImage()));
             description.setText(post.getDescription());
+
 
 
 

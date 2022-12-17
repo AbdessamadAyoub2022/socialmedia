@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ public class home extends AppCompatActivity {
      String email_previous;
      DatabaseHelper db;
      List<Post> posts;
+     Handler handler;
 
 
     @Override
@@ -29,19 +31,29 @@ public class home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.purple_700)));
-        email_previous=getIntent().getStringExtra("email");
-        db=new DatabaseHelper(this);
-         posts=db.getallposts();
-        Integer sz=posts.size();
-        String size =sz.toString();
-        Toast.makeText(this, size, Toast.LENGTH_SHORT).show();
-        PostHomeAdapter   adapter=new PostHomeAdapter(this,R.layout.post_home,posts);
-        ListView listView=findViewById(R.id.home_listview);
+        email_previous = getIntent().getStringExtra("email");
+        db = new DatabaseHelper(this);
+        posts = db.getallposts();
+        PostHomeAdapter adapter = new PostHomeAdapter(this, R.layout.post_home, posts);
+        ListView listView = findViewById(R.id.home_listview);
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
 
+        this.handler = new Handler();
 
+
+         final Runnable m_Runnable = ()->{
+                finish();
+                startActivity(getIntent());
+         };
+        this.handler.postDelayed(m_Runnable, 30000);
     }
+
+
+
+
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,10 +84,7 @@ public class home extends AppCompatActivity {
                 startActivity(intent2);
 
                 return true;
-            case R.id.refresh:
-                finish();
-                startActivity(getIntent());
-                return true;
+
 
             default:return super.onOptionsItemSelected(item);
         }
