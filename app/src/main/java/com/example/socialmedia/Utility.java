@@ -10,12 +10,12 @@ import java.io.ByteArrayOutputStream;
 public class Utility {
     public static Bitmap convertBLOB2Bitmap(byte[] blob) {
         BitmapFactory.Options options = new BitmapFactory.Options();
-        Bitmap tmp = BitmapFactory.decodeByteArray(blob, 0, blob.length, options);
+        Bitmap tmp = BitmapFactory.decodeByteArray(blob, 100, blob.length, options);
         return tmp;
     }
     public static byte[] convertBitmap2BLOB(@NonNull Bitmap bitmap) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0 , bos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100 , bos);
         return bos.toByteArray();
     }
 }

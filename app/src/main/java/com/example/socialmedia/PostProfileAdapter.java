@@ -18,10 +18,11 @@ import java.util.zip.Inflater;
 
 public class PostProfileAdapter extends ArrayAdapter<Post> {
     Context context;
-    List<Post> posts=new ArrayList<>();
+    List<Post> posts;
     int ressource;
     public PostProfileAdapter(Context context,int ressource,List<Post> posts){
         super(context,ressource,posts);
+        this.posts=posts;
     }
 
 

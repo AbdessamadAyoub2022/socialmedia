@@ -280,8 +280,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Post> getallposts(String email){
         List <Post> posts=new ArrayList<>();
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cursor=db.query(POST_USER,null,EMAIL_POST+" = ?",new String[]{email},null,null,ID_POST+" DESC");
-
+       // Cursor cursor=db.query(POST_USER,null,EMAIL_POST+" = ?",new String[]{email},null,null,ID_POST+" DESC");
+       // Cursor cursor=db.rawQuery("select * from "+POST_USER+" where  " +EMAIL_POST +" = \" " +email+" \" ",null);
+        Cursor cursor=db.rawQuery(String.format("select * from %s where %s=\"%s\" order by %s desc;",POST_USER,EMAIL_POST,email,ID_POST),null);
         if(cursor!=null){
             if(cursor.moveToFirst()){
                 do{

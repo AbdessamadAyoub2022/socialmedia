@@ -15,13 +15,14 @@ import android.widget.Toast;
 import com.example.socialmedia.model2.DatabaseHelper;
 import com.example.socialmedia.model2.Post;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class home extends AppCompatActivity {
      String email_previous;
      DatabaseHelper db;
-     List<Post> posts;
+     List<Post> posts=new ArrayList<>();
      PostHomeAdapter adapter;
 
     @Override
@@ -32,12 +33,9 @@ public class home extends AppCompatActivity {
         email_previous=getIntent().getStringExtra("email");
         db=new DatabaseHelper(this);
          posts=db.getallposts();
-        Integer sz=posts.size();
-        String size =sz.toString();
-        Toast.makeText(this, size, Toast.LENGTH_SHORT).show();
-     /*adapter=new PostHomeAdapter(this,R.layout.post_home,posts);
+         adapter=new PostHomeAdapter(this,R.layout.post_home,posts);
         ListView listView=findViewById(R.id.home_listview);
-        listView.setAdapter(adapter);*/
+        listView.setAdapter(adapter);
     }
 
     @Override

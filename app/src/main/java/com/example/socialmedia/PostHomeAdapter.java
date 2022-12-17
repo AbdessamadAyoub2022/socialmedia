@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.socialmedia.model2.Post;
 
@@ -17,22 +20,34 @@ import java.util.List;
 public class PostHomeAdapter extends ArrayAdapter<Post> {
     private List<Post> posts=new ArrayList<>();
     private Context context;
-   private  int ressource;
+    LayoutInflater lInflater;
+    int ressource;
+
     PostHomeAdapter(Context context,int ressource,List<Post> posts){
         super(context,ressource,posts);
+
 
     }
 
     @Override
-    public View getView(int position, View convertview, ViewGroup parent){
-        Post post=posts.get(position);
-        View item= LayoutInflater.from(context).inflate(ressource,parent,false);
-        ImageView image=item.findViewById(R.id.picture);
-        TextView email=item.findViewById(R.id.user);
-        TextView desc=item.findViewById(R.id.description);
+    public View getView(int position, @NonNull View convertview, @NonNull ViewGroup parent){
+
+         convertview= lInflater.from(getContext()).inflate(R.layout.post_home,parent,false);
+         Post post=getItem(position);
+        ImageView image=convertview.findViewById(R.id.picture);
+        TextView email=convertview.findViewById(R.id.user);
+        TextView desc=convertview.findViewById(R.id.description);
         image.setImageBitmap(Utility.convertBLOB2Bitmap(post.getImage()));
         email.setText(post.getEmail_user());
         desc.setText(post.getDescription());
-        return item;
+        return convertview;
     }
+    public int getCount() {
+        return posts.size();
+    }
+    public Post getItem(int position) {
+        return posts.get(position);
+    }
+
+
 }
